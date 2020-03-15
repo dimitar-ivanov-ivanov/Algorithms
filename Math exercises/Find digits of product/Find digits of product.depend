@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1584302398 source:d:\programming\c\algorithms\math exercises\find digits of product\main.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+
