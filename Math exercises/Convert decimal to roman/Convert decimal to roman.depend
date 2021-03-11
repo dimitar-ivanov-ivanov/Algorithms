@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1585554122 source:d:\programming\c\algorithms\math exercises\convert decimal to roman\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+

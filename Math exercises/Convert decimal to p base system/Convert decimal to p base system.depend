@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1585549884 source:d:\programming\c\c softuni\dynamic memory\convert decimal to p base system\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1585550091 source:d:\programming\c\algorithms\math exercises\convert decimal to p base system\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+

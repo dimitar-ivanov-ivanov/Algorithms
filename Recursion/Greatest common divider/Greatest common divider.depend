@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1585727047 source:d:\programming\c\algorithms\recursion\greatest common divider\main.c
+	<stdio.h>
+	<stdlib.h>
+

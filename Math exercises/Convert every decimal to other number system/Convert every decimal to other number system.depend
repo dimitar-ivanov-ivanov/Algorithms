@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1585551508 source:d:\programming\c\algorithms\math exercises\convert every decimal to other number system\main.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	<string.h>
+

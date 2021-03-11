@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1585567520 source:d:\programming\c\algorithms\recursion\sum\main.c
+	<stdio.h>
+	<stdlib.h>
+

@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1614858470 source:d:\programming\algorithms\САА домашни\1-во домашно\first homework\main.cpp
+	<iostream>
+	"math.h"
+
+1614868768 source:d:\programming\algorithms\САА домашни\1-во домашно\first homework\2-ра задача.cpp
+	<iostream>
+	"math.h"
+

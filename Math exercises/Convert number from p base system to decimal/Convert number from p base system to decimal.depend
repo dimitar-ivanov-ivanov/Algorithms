@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1585552451 source:d:\programming\c\algorithms\math exercises\convert number from p base system to decimal\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
