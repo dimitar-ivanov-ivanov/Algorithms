@@ -7,7 +7,6 @@ using namespace std;
 #define MAX_SIZE 100
 #define NO_OF_CHARS 256
 
-
 // Предварителна фунцкия за Boyer Moore,маркиране на наличните символи
 void markiraneNaNalichie(string str, int size,int badchar[NO_OF_CHARS]) {
     int i;
@@ -31,19 +30,16 @@ int booyerMoore(string text, string shablon) {
     /* Пълним масива с -1 за неналичие и с позиция на символа в шаблона ако има наличие */
     markiraneNaNalichie(shablon, shablonDaljina, nalichie);
 
+    /* Индекс за показване докъде сме стигнали в текста*/
     int s = 0;
     while(s <= (textDaljina - shablonDaljina)) {
         int j = shablonDaljina - 1;
 
-        /* Keep reducing index j of pattern while
-        characters of pattern and text are
-        matching at this shift s */
+        /* Намаляваме j докато текста и шаблона са еднакви */
         while(j >= 0 && shablon[j] == text[s + j])
             j--;
 
-        /* If the pattern is present at current
-        shift, then index j will become -1 after
-        the above loop */
+        /* Ако текста съдържа шаблона тогава j ще стане -1*/
         if (j < 0) {
             cout << "pattern occurs at shift = " << s << endl;
 
@@ -73,12 +69,12 @@ int booyerMoore(string text, string shablon) {
 
 int main() {
     int redove,koloni,red,kolona,maxProverka,minProverka,namereniSa,redaNaMax,redaNaMin;
-    string maxStr,minStr;
+    string maxStr,minStr,temp;
 
-    cout << "Vavedete redovete na matricata: \n";
+    cout << "Vavedete redovete na matricata: ";
     cin >> redove;
 
-    cout << "Vavedete kolonite na matricata: \n";
+    cout << "Vavedete kolonite na matricata: ";
     cin >> koloni;
     cin.ignore(1,'\n'); //Игнорираме \n тъй като getline го обхваща
 
@@ -93,11 +89,11 @@ int main() {
     }
 
     /* Вход на най-голям елемент */
-    cout << "Vavedete nai-golemiq element"  << endl;
+    cout << "Vavedete nai-golemiq element: ";
     getline(cin, maxStr);
 
     /* Вход на най-малък елемент */
-    cout << "Vavedete nai-malkiq element" << endl;
+    cout << "Vavedete nai-malkiq element: ";
     getline (cin, minStr);
 
     //Прилагаме алгоритъма за всеки елемент, проверяваме дали е макс или мин елемент
@@ -143,7 +139,16 @@ int main() {
         }
     }
 
-    //TODO: Разместване на редовете съдърщаши макс и мин елемент
+    //Разместване на редовете съдърщаши макс и мин елемент
+    if(redaNaMax != -1 && redaNaMin != -1){
+        string temp;
+
+        for(kolona = 0; kolona < koloni; kolona++){
+          temp = matrica[redaNaMax][kolona];
+          matrica[redaNaMax][kolona] = matrica[redaNaMin][kolona];
+          matrica[redaNaMin][kolona] = temp;
+        }
+    }
 
     //Принтиране на матрицата
     for(red=0; red<redove; red++) {
@@ -156,7 +161,6 @@ int main() {
             }
         }
     }
-
 
     return 0;
 }
