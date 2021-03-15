@@ -2,22 +2,19 @@
 
 using namespace std;
 
-#define REDOVE 50
-#define KOLONI 50
-#define MAX_SIZE 100
 #define NO_OF_CHARS 256
 
 // Предварителна фунцкия за Boyer Moore,маркиране на наличните символи
-void markiraneNaNalichie(string str, int size,int badchar[NO_OF_CHARS]) {
+void markiraneNaNalichie(string str, int size,int nalichie[NO_OF_CHARS]) {
     int i;
 
     // Иниализираме всички символи с -1 за неналичие
     for (i = 0; i < NO_OF_CHARS; i++)
-        badchar[i] = -1;
+        nalichie[i] = -1;
 
     // Поставяме индекса
     for (i = 0; i < size; i++)
-        badchar[(int) str[i]] = i;
+        nalichie[(int) str[i]] = i;
 }
 
 /* Търсене на стринг в текст с използване на Boyer Moore алгоритъм */
@@ -31,17 +28,16 @@ int booyerMoore(string text, string shablon) {
     markiraneNaNalichie(shablon, shablonDaljina, nalichie);
 
     /* Индекс за показване докъде сме стигнали в текста*/
-    int s = 0;
-    while(s <= (textDaljina - shablonDaljina)) {
+    int indexText = 0;
+    while(indexText <= (textDaljina - shablonDaljina)) {
         int j = shablonDaljina - 1;
 
         /* Намаляваме j докато текста и шаблона са еднакви */
-        while(j >= 0 && shablon[j] == text[s + j])
+        while(j >= 0 && shablon[j] == text[indexText + j])
             j--;
 
         /* Ако текста съдържа шаблона тогава j ще стане -1*/
         if (j < 0) {
-            cout << "pattern occurs at shift = " << s << endl;
 
             /* Shift the pattern so that the next
             character in text aligns with the last
@@ -49,7 +45,9 @@ int booyerMoore(string text, string shablon) {
             The condition s+m < n is necessary for
             the case when pattern occurs at the end
             of text */
-            s += (s + shablonDaljina < textDaljina)? shablonDaljina-nalichie[text[s + shablonDaljina]] : 1;
+            indexText += (indexText + shablonDaljina < textDaljina)?
+                         shablonDaljina-nalichie[text[indexText + shablonDaljina]]
+                         : 1;
             return 1;
         } else {
             /* Shift the pattern so that the bad character
@@ -60,7 +58,7 @@ int booyerMoore(string text, string shablon) {
             occurrence of bad character in pattern
             is on the right side of the current
             character. */
-            s += max(1, j - nalichie[text[s + j]]);
+            indexText += max(1, j - nalichie[text[indexText + j]]);
         }
     }
 
