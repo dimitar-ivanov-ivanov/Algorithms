@@ -2,19 +2,123 @@
 
 using namespace std;
 
+#define MAX_REDOVE 50
+#define MAX_KOLONI 50
 #define NO_OF_CHARS 256
 
-// Предварителна фунцкия за Boyer Moore,маркиране на наличните символи
-void markiraneNaNalichie(string str, int size,int nalichie[NO_OF_CHARS]) {
-    int i;
+void vhodMatrica(string matrica[MAX_REDOVE][MAX_KOLONI],int redove,int koloni);
+void izhodMatrica(string matrica[MAX_REDOVE][MAX_KOLONI],int redove,int koloni);
+void markiraneNaNalichie(string str, int size,int nalichie[NO_OF_CHARS]);
+int booyerMoore(string text, string shablon);
+void proveriZaBoyerMoore(string matrica[MAX_REDOVE][MAX_KOLONI],int redove,int koloni,string maxStr,string minStr);
 
-    // Иниализираме всички символи с -1 за неналичие
-    for (i = 0; i < NO_OF_CHARS; i++)
-        nalichie[i] = -1;
+int main() {
+    int redove,koloni;
+    string maxStr,minStr,temp;
 
-    // Поставяме индекса
-    for (i = 0; i < size; i++)
-        nalichie[(int) str[i]] = i;
+    cout << "Vavedete redovete na matricata: ";
+    cin >> redove;
+
+    cout << "Vavedete kolonite na matricata: ";
+    cin >> koloni;
+    cin.ignore(1,'\n'); //Игнорираме \n тъй като getline го обхваща
+
+    string matrica[MAX_REDOVE][MAX_KOLONI];
+    vhodMatrica(matrica,redove,koloni);
+
+    /* Вход на най-голям елемент */
+    cout << "Vavedete nai-golemiq element: ";
+    getline(cin, maxStr);
+
+    /* Вход на най-малък елемент */
+    cout << "Vavedete nai-malkiq element: ";
+    getline (cin, minStr);
+
+    proveriZaBoyerMoore(matrica,redove,koloni,maxStr,minStr);
+    izhodMatrica(matrica,redove,koloni);
+
+    return 0;
+}
+
+void vhodMatrica(string matrica[MAX_REDOVE][MAX_KOLONI],int redove,int koloni) {
+//Въвеждане на матрицата
+    for(int red=0; red<redove; red++) {
+        for(int kolona = 0; kolona < koloni; kolona++) {
+            cout << "Vavedete stoinost za kletka (" << red << "," << kolona <<") : ";
+            getline(cin,matrica[red][kolona]);
+        }
+    }
+}
+
+void izhodMatrica(string matrica[MAX_REDOVE][MAX_KOLONI],int redove,int koloni) {
+//Принтиране на матрицата
+    for(int red=0; red<redove; red++) {
+        cout << "Red " << red + 1 << " : ";
+        for(int kolona = 0; kolona < koloni; kolona++) {
+            if(kolona == koloni - 1) {
+                cout << matrica[red][kolona] << endl;
+            } else {
+                cout << matrica[red][kolona] + ", ";
+            }
+        }
+    }
+}
+
+void proveriZaBoyerMoore(string matrica[MAX_REDOVE][MAX_KOLONI],int redove,int koloni,string maxStr,string minStr) {
+    int red,kolona,maxProverka,minProverka,namereniSa,redaNaMax,redaNaMin;
+   //Прилагаме алгоритъма за всеки елемент, проверяваме дали е макс или мин елемент
+    maxProverka = -1;
+    minProverka = -1;
+    namereniSa = -1;
+    redaNaMax = -1;
+    redaNaMin = -1;
+
+    for(red=0; red<redove; red++) {
+        for(kolona = 0; kolona < koloni; kolona++) {
+
+            //Ако един път сме намерили най-големия стринг няма смисъл отново да го търсим
+            if(maxProverka == -1) {
+                maxProverka = booyerMoore(matrica[red][kolona],maxStr);
+            }
+
+            //Записваме реда на максималния елемент, правим проверка дали вече не сме го записали
+            if(maxProverka == 1 && redaNaMax == -1) {
+                redaNaMax = red;
+            }
+
+            //Ако един път сме намерили най-малкия стринг няма смисъл отново да го търсим
+            if(minProverka == -1) {
+                minProverka = booyerMoore(matrica[red][kolona],minStr);
+            }
+
+            //Записваме реда на минималния елемент, правим проверка дали вече не сме го записали
+            if(minProverka == 1 && redaNaMin == -1) {
+                redaNaMin = red;
+            }
+
+            //Намерили сме и най-големия и най-малкия стринг
+            if(maxProverka == 1 && minProverka == 1) {
+                namereniSa = 1;
+                break;
+            }
+        }
+
+        //Ако сме намерили редовете на максималния и минималния няма нужда да продължаваме обхождането
+        if(namereniSa == 1) {
+            break;
+        }
+    }
+
+    //Разместване на редовете съдърщаши макс и мин елемент
+    if(redaNaMax != -1 && redaNaMin != -1) {
+        string temp;
+
+        for(kolona = 0; kolona < koloni; kolona++) {
+            temp = matrica[redaNaMax][kolona];
+            matrica[redaNaMax][kolona] = matrica[redaNaMin][kolona];
+            matrica[redaNaMin][kolona] = temp;
+        }
+    }
 }
 
 /* Търсене на стринг в текст с използване на Boyer Moore алгоритъм */
@@ -65,100 +169,15 @@ int booyerMoore(string text, string shablon) {
     return -1;
 }
 
-int main() {
-    int redove,koloni,red,kolona,maxProverka,minProverka,namereniSa,redaNaMax,redaNaMin;
-    string maxStr,minStr,temp;
+// Предварителна фунцкия за Boyer Moore,маркиране на наличните символи
+void markiraneNaNalichie(string str, int size,int nalichie[NO_OF_CHARS]) {
+    int i;
 
-    cout << "Vavedete redovete na matricata: ";
-    cin >> redove;
+    // Иниализираме всички символи с -1 за неналичие
+    for (i = 0; i < NO_OF_CHARS; i++)
+        nalichie[i] = -1;
 
-    cout << "Vavedete kolonite na matricata: ";
-    cin >> koloni;
-    cin.ignore(1,'\n'); //Игнорираме \n тъй като getline го обхваща
-
-    string matrica[redove][koloni];
-
-    //Въвеждане на матрицата
-    for( red=0; red<redove; red++) {
-        for( kolona = 0; kolona < koloni; kolona++) {
-            cout << "Vavedete stoinost za kletka (" << red << "," << kolona <<") : ";
-            getline(cin,matrica[red][kolona]);
-        }
-    }
-
-    /* Вход на най-голям елемент */
-    cout << "Vavedete nai-golemiq element: ";
-    getline(cin, maxStr);
-
-    /* Вход на най-малък елемент */
-    cout << "Vavedete nai-malkiq element: ";
-    getline (cin, minStr);
-
-    //Прилагаме алгоритъма за всеки елемент, проверяваме дали е макс или мин елемент
-    maxProverka = -1;
-    minProverka = -1;
-    namereniSa = -1;
-    redaNaMax = -1;
-    redaNaMin = -1;
-
-    for(red=0; red<redove; red++) {
-        for(kolona = 0; kolona < koloni; kolona++) {
-
-            //Ако един път сме намерили най-големия стринг няма смисъл отново да го търсим
-            if(maxProverka == -1) {
-                maxProverka = booyerMoore(matrica[red][kolona],maxStr);
-            }
-
-            //Записваме реда на максималния елемент, правим проверка дали вече не сме го записали
-            if(maxProverka == 1 && redaNaMax == -1) {
-                redaNaMax = red;
-            }
-
-            //Ако един път сме намерили най-малкия стринг няма смисъл отново да го търсим
-            if(minProverka == -1) {
-                minProverka = booyerMoore(matrica[red][kolona],minStr);
-            }
-
-            //Записваме реда на минималния елемент, правим проверка дали вече не сме го записали
-            if(minProverka == 1 && redaNaMin == -1) {
-                redaNaMin = red;
-            }
-
-            //Намерили сме и най-големия и най-малкия стринг
-            if(maxProverka == 1 && minProverka == 1) {
-                namereniSa = 1;
-                break;
-            }
-        }
-
-        //Ако сме намерили редовете на максималния и минималния няма нужда да продължаваме обхождането
-        if(namereniSa == 1) {
-            break;
-        }
-    }
-
-    //Разместване на редовете съдърщаши макс и мин елемент
-    if(redaNaMax != -1 && redaNaMin != -1){
-        string temp;
-
-        for(kolona = 0; kolona < koloni; kolona++){
-          temp = matrica[redaNaMax][kolona];
-          matrica[redaNaMax][kolona] = matrica[redaNaMin][kolona];
-          matrica[redaNaMin][kolona] = temp;
-        }
-    }
-
-    //Принтиране на матрицата
-    for(red=0; red<redove; red++) {
-        cout << "Red " << red + 1 << " : ";
-        for(kolona = 0; kolona < koloni; kolona++) {
-            if(kolona == koloni - 1) {
-                cout << matrica[red][kolona] << endl;
-            } else {
-                cout << matrica[red][kolona] + ", ";
-            }
-        }
-    }
-
-    return 0;
+    // Поставяме индекса
+    for (i = 0; i < size; i++)
+        nalichie[(int) str[i]] = i;
 }
