@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string.h>
-#include<stdio.h>
+#include <stdio.h>
 #include "saobshteniq.h"
 #include "ogranicheniq.h"
 
