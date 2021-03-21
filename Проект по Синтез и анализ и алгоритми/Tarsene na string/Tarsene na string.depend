@@ -2,22 +2,26 @@
 1615561121 source:d:\programming\algorithms\САА Проект\tarsene na string\main.cpp
 	<iostream>
 
-1616004497 source:d:\programming\algorithms\Проект по Синтез и анализ и алгоритми\tarsene na string\main.cpp
+1616327834 source:d:\programming\algorithms\Проект по Синтез и анализ и алгоритми\tarsene na string\main.cpp
 	"main.h"
 
 1616325540 source:d:\programming\algorithms\Проект по Синтез и анализ и алгоритми\tarsene na string\boyer-moore.cpp
 	"main.h"
 
-1616004458 d:\programming\algorithms\Проект по Синтез и анализ и алгоритми\tarsene na string\main.h
+1616328847 d:\programming\algorithms\Проект по Синтез и анализ и алгоритми\tarsene na string\main.h
 	<iostream>
 	<string.h>
+	<stdio.h>
 	"saobshteniq.h"
+	"ogranicheniq.h"
 
 1616003190 source:d:\programming\algorithms\Проект по Синтез и анализ и алгоритми\tarsene na string\izhod.cpp
 	"main.h"
 
-1616004245 source:d:\programming\algorithms\Проект по Синтез и анализ и алгоритми\tarsene na string\vhod.cpp
+1616329052 source:d:\programming\algorithms\Проект по Синтез и анализ и алгоритми\tarsene na string\vhod.cpp
 	"main.h"
 
-1616004394 d:\programming\algorithms\Проект по Синтез и анализ и алгоритми\tarsene na string\saobshteniq.h
+1616329042 d:\programming\algorithms\Проект по Синтез и анализ и алгоритми\tarsene na string\saobshteniq.h
+
+1616327810 d:\programming\algorithms\Проект по Синтез и анализ и алгоритми\tarsene na string\ogranicheniq.h
 

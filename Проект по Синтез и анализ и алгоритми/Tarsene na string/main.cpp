@@ -5,8 +5,8 @@ int main() {
     string maxStr,minStr,temp;
 
     /* Вход на размери на матрицата */
-    redove = vavedeteChislo(VAVEDETERED);
-    koloni = vavedeteChislo(VAVEDETEKOLONA);
+    redove = vavedeteChislo(VAVEDETERED,MIN_DIMENSII,MAX_REDOVE);
+    koloni = vavedeteChislo(VAVEDETEKOLONA,MIN_DIMENSII,MAX_KOLONI);
 
     cin.ignore(1,'\n'); //Игнорираме \n тъй като getline го обхваща
 

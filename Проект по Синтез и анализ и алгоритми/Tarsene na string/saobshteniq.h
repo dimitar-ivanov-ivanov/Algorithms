@@ -1,4 +1,8 @@
 #define VAVEDETERED "Vavedete redovete na matricata: "
 #define VAVEDETEKOLONA "Vavedete kolonite na matricata: "
+#define VAVEDETESTOINOSTZAKLETKA "Vavedete stoinost za kletka (%d,%d) : "
+#define VAVEDENOCHISLOGOLQMO "Vavedenoto chislo previshava ogranicheniqta, ne moje da e poveche ot "
+#define VAVEDENOCHISLONEMALKO "Vavedenoto chislo e prekaleno malko, ne moje da e po-malko ot "
+#define VAVEDENIQTEXTEPRAZEN "Vavedniq text e prazen."
 #define VAVEDETEMAXSTRING "Vavedete nai-golemiq element: "
 #define VAVEDETEMINSTRING "Vavedete nai-malkiq element: "
