@@ -37,6 +37,8 @@
 		<Unit filename="izhod.cpp" />
 		<Unit filename="main.cpp" />
 		<Unit filename="main.h" />
+		<Unit filename="obhojdane.cpp" />
+		<Unit filename="ogranicheniq.h" />
 		<Unit filename="saobshteniq.h" />
 		<Unit filename="vhod.cpp" />
 		<Extensions>
