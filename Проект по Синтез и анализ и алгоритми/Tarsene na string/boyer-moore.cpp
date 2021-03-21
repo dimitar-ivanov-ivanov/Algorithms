@@ -9,7 +9,7 @@ void proveriZaBoyerMoore(string matrica[MAX_REDOVE][MAX_KOLONI],int redove,int k
     redaNaMax = -1;
     redaNaMin = -1;
 
-   //Прилагаме алгоритъма за всеки елемент, проверяваме дали е макс или мин елемент
+    //Прилагаме алгоритъма за всеки елемент, проверяваме дали е макс или мин елемент
     for(red=0; red<redove; red++) {
         for(kolona = 0; kolona < koloni; kolona++) {
 
@@ -63,6 +63,14 @@ int booyerMoore(string text, string shablon) {
     int shablonDaljina = shablon.size();
     int textDaljina = text.size();
 
+    /* Проверяваме за равенство между 2-те дължини защото шаблона
+       ще отчета ако имаме текст който вътрешн съдържа шаблона.
+       В този случай грешно че отчетем местоположението на максималния и минималния елемент
+    */
+    if(shablonDaljina != textDaljina){
+        return -1;
+    }
+
     int nalichie[NO_OF_CHARS];
 
     /* Пълним масива с -1 за неналичие и с позиция на символа в шаблона ако има наличие */
@@ -74,31 +82,19 @@ int booyerMoore(string text, string shablon) {
         int j = shablonDaljina - 1;
 
         /* Намаляваме j докато текста и шаблона са еднакви */
-        while(j >= 0 && shablon[j] == text[indexText + j])
+        while(j >= 0 && shablon[j] == text[indexText + j]) {
             j--;
+        }
 
         /* Ако текста съдържа шаблона тогава j ще стане -1*/
         if (j < 0) {
-
-            /* Shift the pattern so that the next
-            character in text aligns with the last
-            occurrence of it in pattern.
-            The condition s+m < n is necessary for
-            the case when pattern occurs at the end
-            of text */
-            indexText += (indexText + shablonDaljina < textDaljina)?
-                         shablonDaljina-nalichie[text[indexText + shablonDaljina]]
-                         : 1;
+            /* Шаблона е намерен връщаме 1 за да потвърдим */
             return 1;
         } else {
-            /* Shift the pattern so that the bad character
-            in text aligns with the last occurrence of
-            it in pattern. The max function is used to
-            make sure that we get a positive shift.
-            We may get a negative shift if the last
-            occurrence of bad character in pattern
-            is on the right side of the current
-            character. */
+            /* Местим шаблона толкова знака напред колкото е наличието
+              на символа от текста където сме имали неравенство
+              от масива за наличие на символи.
+              Макс функция е сложена за да осигурен преместване надясно в текста.*/
             indexText += max(1, j - nalichie[text[indexText + j]]);
         }
     }
@@ -114,8 +110,11 @@ void markiraneNaNalichie(string str, int size,int nalichie[NO_OF_CHARS]) {
     for (i = 0; i < NO_OF_CHARS; i++)
         nalichie[i] = -1;
 
-    // Поставяме индекса
-    for (i = 0; i < size; i++)
+    /* Поставяме индекса за да потвърдим наличие
+       Ако имаме 2 еднакви символа ще се пренапише
+    */
+    for (i = 0; i < size; i++) {
         nalichie[(int) str[i]] = i;
+    }
 }
 

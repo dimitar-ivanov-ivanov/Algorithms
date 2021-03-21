@@ -12,6 +12,7 @@
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
+					<Add option="-Og" />
 					<Add option="-g" />
 				</Compiler>
 			</Target>
@@ -33,8 +34,11 @@
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Unit filename="boyer-moore.cpp" />
+		<Unit filename="izhod.cpp" />
 		<Unit filename="main.cpp" />
 		<Unit filename="main.h" />
+		<Unit filename="saobshteniq.h" />
+		<Unit filename="vhod.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />
